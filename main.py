@@ -13,7 +13,8 @@ def create_pipe():
 def move_pipes(pipes):
 	for pipe in pipes:
 		pipe.centerx -= 5
-	return pipes
+	visible_pipes = [pipe for pipe in pipes if pipe.right > -50]
+	return visible_pipes
 
 def draw_pipes(pipes):
 	for pipe in pipes:
@@ -103,7 +104,7 @@ bird_downflap = pygame.transform.scale2x(pygame.image.load('assets/bluebird-down
 bird_midflap = pygame.transform.scale2x(pygame.image.load('assets/bluebird-midflap.png').convert_alpha())
 bird_upflap = pygame.transform.scale2x(pygame.image.load('assets/bluebird-upflap.png').convert_alpha())
 bird_frames = [bird_downflap, bird_midflap, bird_upflap]
-bird_index = 2
+bird_index = 0
 bird_surface = bird_frames[bird_index]
 bird_rect = bird_surface.get_rect(center = (100, 512))
 
@@ -128,7 +129,8 @@ flap_sound = pygame.mixer.Sound('sound/sfx_wing.wav')
 death_sound  = pygame.mixer.Sound('sound/sfx_hit.wav')
 score_sound = pygame.mixer.Sound('sound/sfx_point.wav')
 score_sound_countdown = 100
-
+SCOREEVENT = pygame.USEREVENT + 2
+pygame.time.set_timer(SCOREEVENT, 100)
 
 while True:
 	for event in pygame.event.get():
