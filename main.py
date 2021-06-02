@@ -1,4 +1,4 @@
-import pygame, sys, random
+import pygame, sys, random, time 
 
 def draw_floor():
 	screen.blit(floor_surface,(floor_x_pos,900)) #put surface
@@ -33,6 +33,7 @@ def check_collision(pipes):
 			return False
 
 		if bird_rect.top <= -100 or bird_rect.bottom >= 900:
+			death_sound.play()
 			can_score = True
 			return False
 
@@ -182,6 +183,7 @@ while True:
 		screen.blit(game_over_surface, game_over_rect)
 		high_score = update_score(score, high_score)
 		score_display('game_over')
+		time.sleep(0.1)
 
 
 	#Floor
