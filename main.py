@@ -36,7 +36,6 @@ def check_collision(pipes):
 			death_sound.play()
 			can_score = True
 			return False
-
 	return True
 
 def rotate_bird(bird):
